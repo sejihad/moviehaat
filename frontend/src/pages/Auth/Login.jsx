@@ -38,8 +38,8 @@ const Login = () => {
   const [registerPasswordVisible, setRegisterPasswordVisible] = useState(false);
   const [registerConfirmPasswordVisible, setRegisterConfirmPasswordVisible] =
     useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
-  const [bookTerms, setBookTerms] = useState(false);
+  // Terms acceptance is temporarily disabled.
+  // const [agreeTerms, setAgreeTerms] = useState(false);
 
   const [otp, setOtp] = useState("");
 
@@ -95,12 +95,13 @@ const Login = () => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
-    if (!agreeTerms) {
-      toast.error(
-        "Please agree to the Terms and Conditions before registering."
-      );
-      return;
-    }
+    // Terms acceptance validation is temporarily disabled.
+    // if (!agreeTerms) {
+    //   toast.error(
+    //     "Please agree to the Terms and Conditions before registering."
+    //   );
+    //   return;
+    // }
     // Password confirmation check
     if (registerPassword !== registerConfirmPassword) {
       return toast.error("Passwords do not match");
@@ -110,7 +111,6 @@ const Login = () => {
     formData.set("name", registerName);
     formData.set("email", registerEmail);
     formData.set("password", registerPassword);
-    formData.set("bookTerms", bookTerms);
 
     dispatch(register(formData));
   };
@@ -263,19 +263,7 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Terms and Conditions Checkbox */}
-            <div className="terms-box">
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={bookTerms}
-                  onChange={(e) => setBookTerms(e.target.checked)}
-                  className="checkbox-input"
-                />
-                <span className="checkmark"></span>Would you like a free Sampler
-                Book?
-              </label>
-            </div>
+            {/* Terms acceptance is temporarily disabled.
             <div className="terms-box">
               <label className="checkbox-label">
                 <input
@@ -290,6 +278,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
+            */}
 
             <button type="submit" className="btn" disabled={loading}>
               {loading ? "Loading..." : "Register"}

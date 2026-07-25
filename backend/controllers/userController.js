@@ -11,7 +11,7 @@ const deleteFromS3 = require("../config/deleteFromS3");
 
 // ✅ Register User
 const registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password, bookTerms } = req.body;
+  const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
     return next(
@@ -29,7 +29,6 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
     password,
   });
 
-  // Welcome message based on bookTerms
   let message = `
     Hi ${name},
 
@@ -38,17 +37,6 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
     Your account has been created successfully.
     You can now log in using your email: ${email}
   `;
-
-  // Add sampler book link if user agreed to terms
-  if (bookTerms === "true") {
-    message += `
-
-    📚 Your Free Sampler Book:
-
-    Here is your exclusive sampler book download link:
-    🔗 https://moviehaat.org
-`;
-  }
 
   message += `
 
@@ -61,10 +49,7 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject:
-        bookTerms === "true"
-          ? "Welcome to MovieHaat - Your Sampler Book Inside! 🎉📚"
-          : "Welcome to MovieHaat 🎉",
+      subject: "Welcome to MovieHaat 🎉",
       message,
     });
   } catch (error) {
