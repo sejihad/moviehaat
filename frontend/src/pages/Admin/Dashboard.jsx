@@ -1,0 +1,11 @@
+import { Film, Plus, Users } from "lucide-react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getAdminMovies } from "../../actions/movieAction";
+import { getAllUsers } from "../../actions/userAction";
+import MetaData from "../../component/layout/MetaData";
+import Sidebar from "./Sidebar";
+import "./adminMovies.css";
+const Dashboard=()=>{const dispatch=useDispatch();const {movies}=useSelector(s=>s.adminMovies);const {users}=useSelector(s=>s.allUsers);useEffect(()=>{dispatch(getAdminMovies());dispatch(getAllUsers())},[dispatch]);return <div className="admin-shell"><Sidebar/><main className="admin-content"><MetaData title="Dashboard | Admin"/><div className="admin-title"><div><p>Overview</p><h1>Dashboard</h1></div><Link className="admin-primary" to="/admin/movie/new"><Plus size={18}/>Add movie</Link></div><div className="dashboard-stats"><Link to="/admin/movies"><Film/><span>Movies</span><strong>{movies?.length||0}</strong></Link><Link to="/admin/users"><Users/><span>Users</span><strong>{users?.length||0}</strong></Link></div><section className="recent-movies"><h2>Recently added</h2>{movies?.slice(0,5).map(movie=><Link key={movie._id} to={`/admin/movie/${movie._id}`}><img src={movie.poster?.url} alt=""/><span>{movie.title}</span><small>{movie.published?"Published":"Draft"}</small></Link>)}</section></main></div>};
+export default Dashboard;

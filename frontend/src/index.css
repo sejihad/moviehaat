@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/*
+ * Movie site — global dark theme
+ * Use these semantic tokens in every component so the visual language stays
+ * consistent and can be adjusted from one place.
+ */
+:root {
+  color-scheme: dark;
+
+  --color-background: #080a0f;
+  --color-background-elevated: #0d1119;
+  --color-surface: #121722;
+  --color-surface-hover: #191f2c;
+  --color-surface-muted: #202736;
+
+  --color-text: #f5f7fb;
+  --color-text-secondary: #a8b0c0;
+  --color-text-muted: #737d91;
+
+  --color-primary: #e50914;
+  --color-primary-hover: #ff1f2a;
+  --color-primary-soft: rgba(229, 9, 20, 0.14);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-overlay: rgba(0, 0, 0, 0.72);
+
+  --color-success: #32d583;
+  --color-warning: #fdb022;
+  --color-danger: #f04438;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --shadow-card: 0 18px 45px rgba(0, 0, 0, 0.28);
+  --transition-base: 180ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--color-background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Shared layout and theme primitives */
+.container {
+  width: min(100% - 2rem, 1600px);
+  margin-inline: auto;
+}
+
+.theme-surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.theme-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.theme-card:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+.theme-input {
+  width: 100%;
+  background: var(--color-background-elevated);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.theme-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.theme-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+  outline: none;
+}
+
+.theme-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.1rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.theme-button-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+* {
+  scrollbar-color: var(--color-surface-muted) var(--color-background);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-muted);
+  border: 2px solid var(--color-background);
+  border-radius: 999px;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Legacy light-theme compatibility
+ *
+ * Older pages still use Tailwind's white/gray utility palette. Keeping the
+ * conversion here makes every current and future routed page inherit the same
+ * MovieHaat dark surfaces without duplicating page-specific overrides.
+ */
+.bg-white,
+.bg-gray-50,
+.bg-gray-100,
+.bg-blue-50,
+.bg-indigo-50,
+.bg-green-50 {
+  background-color: var(--color-surface) !important;
+}
+
+.bg-gray-200,
+.bg-gray-300,
+.bg-gray-400 {
+  background-color: var(--color-surface-muted) !important;
+}
+
+.hover\:bg-white:hover,
+.hover\:bg-gray-50:hover,
+.hover\:bg-gray-100:hover,
+.hover\:bg-gray-200:hover,
+.hover\:bg-gray-300:hover {
+  background-color: var(--color-surface-hover) !important;
+}
+
+.text-black,
+.text-gray-900,
+.text-gray-800,
+.text-gray-700 {
+  color: var(--color-text) !important;
+}
+
+.text-gray-600,
+.text-gray-500 {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-gray-400 {
+  color: var(--color-text-muted) !important;
+}
+
+.text-blue-800,
+.text-indigo-800,
+.text-green-800 {
+  color: #d8dce5 !important;
+}
+
+.text-blue-600,
+.text-indigo-600,
+.text-green-600 {
+  color: #ff5962 !important;
+}
+
+.border-gray-100,
+.border-gray-200,
+.border-gray-300,
+.border-gray-400,
+.divide-gray-100 > :not(:last-child),
+.divide-gray-200 > :not(:last-child) {
+  border-color: var(--color-border) !important;
+}
+
+[class*="from-gray-50"],
+[class*="from-gray-100"],
+[class*="from-blue-50"],
+[class*="from-indigo-50"],
+[class*="from-green-50"],
+[class*="to-gray-50"],
+[class*="to-gray-100"],
+[class*="to-blue-50"],
+[class*="to-indigo-50"],
+[class*="to-green-50"],
+[class*="from-[#e2e2e2]"],
+[class*="to-[#c9d6ff]"] {
+  --tw-gradient-from: var(--color-background) !important;
+  --tw-gradient-to: var(--color-background-elevated) !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,
+select {
+  background-color: var(--color-background-elevated);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+table,
+thead,
+tbody,
+tr {
+  border-color: var(--color-border);
+}
