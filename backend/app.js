@@ -32,11 +32,11 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL,
-      "https://moviehaat.com",
-      "https://www.moviehaat.com",
+      "https://moviehaat.org",
+      "https://www.moviehaat.org",
     ],
     credentials: true,
-  })
+  }),
 );
 
 // API Routes

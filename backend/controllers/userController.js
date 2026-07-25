@@ -15,7 +15,7 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!name || !email || !password) {
     return next(
-      new ErrorHandler("Please provide name, email, and password", 400)
+      new ErrorHandler("Please provide name, email, and password", 400),
     );
   }
   const existUser = await User.findOne({ email });
@@ -46,7 +46,7 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
     📚 Your Free Sampler Book:
 
     Here is your exclusive sampler book download link:
-    🔗 https://moviehaat.com
+    🔗 https://moviehaat.org
 `;
   }
 
@@ -87,7 +87,7 @@ const loginUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler("Account doesn't exist. Please register first.", 404)
+      new ErrorHandler("Account doesn't exist. Please register first.", 404),
     );
   }
 
@@ -192,7 +192,7 @@ const googleLoginCallback = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler("Google authentication failed. Please try again.", 401)
+      new ErrorHandler("Google authentication failed. Please try again.", 401),
     );
   }
 
@@ -201,7 +201,7 @@ const googleLoginCallback = catchAsyncErrors(async (req, res, next) => {
   // Cookie set করা
   res.cookie("token", token, {
     expires: new Date(
-      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -257,7 +257,7 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     return next(
-      new ErrorHandler("Email could not be sent. Please try again later.", 500)
+      new ErrorHandler("Email could not be sent. Please try again later.", 500),
     );
   }
 });
@@ -276,7 +276,7 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler("Reset Password Token is invalid or has expired", 400)
+      new ErrorHandler("Reset Password Token is invalid or has expired", 400),
     );
   }
 
@@ -315,11 +315,16 @@ const updateProfile = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User not found", 404));
   }
 
-  const avatarFile = req.files?.avatar || (avatar && {
-    name: "avatar.jpg",
-    mimetype: "image/jpeg",
-    data: Buffer.from(avatar.replace(/^data:image\/\w+;base64,/, ""), "base64"),
-  });
+  const avatarFile =
+    req.files?.avatar ||
+    (avatar && {
+      name: "avatar.jpg",
+      mimetype: "image/jpeg",
+      data: Buffer.from(
+        avatar.replace(/^data:image\/\w+;base64,/, ""),
+        "base64",
+      ),
+    });
 
   if (avatarFile) {
     if (!avatarFile.mimetype?.startsWith("image/")) {
@@ -369,7 +374,7 @@ const deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400)
+      new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400),
     );
   }
 
@@ -402,7 +407,7 @@ const getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler(`User does not exist with Id: ${req.params.id}`)
+      new ErrorHandler(`User does not exist with Id: ${req.params.id}`),
     );
   }
 
