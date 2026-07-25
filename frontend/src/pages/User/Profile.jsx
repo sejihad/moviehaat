@@ -105,6 +105,24 @@ const Profile = () => {
                       </Link>
                     )}
                     <Link
+                      to="/profile/setting"
+                      className="flex items-center text-indigo-600 hover:text-indigo-800"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 2a1 1 0 01.447.106l6 3A1 1 0 0117 6v4c0 4.418-2.865 7.697-6.553 8.894a1.5 1.5 0 01-.894 0C5.865 17.697 3 14.418 3 10V6a1 1 0 01.553-.894l6-3A1 1 0 0110 2zm3.707 6.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Security Settings / 2FA
+                    </Link>
+                    <Link
                       to="/profile/delete"
                       className="flex items-center text-red-600 hover:text-red-800"
                     >
