@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema(
     tags: [{ type: String, trim: true, lowercase: true }],
     releaseDate: { type: Date, required: true },
     durationMinutes: { type: Number, required: true, min: 1 },
-    language: { type: String, required: true, trim: true },
+    language: { type: String, trim: true },
     streamQualities: [
       {
         type: String,
@@ -58,6 +58,13 @@ movieSchema.pre("validate", function (next) {
 });
 
 movieSchema.index({ published: 1, createdAt: -1 });
-movieSchema.index({ title: "text", description: "text", genres: "text", tags: "text" });
+movieSchema.index(
+  { title: "text", description: "text", genres: "text", tags: "text" },
+  {
+    // Keep the movie's free-text `language` field separate from MongoDB's
+    // reserved text-index language override behavior.
+    language_override: "searchLanguage",
+  },
+);
 
 module.exports = mongoose.model("Movie", movieSchema);

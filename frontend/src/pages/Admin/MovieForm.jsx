@@ -105,7 +105,7 @@ const MovieForm = () => {
       <section><h2>Movie information</h2><div className="form-grid">
         <label className="wide">Movie name<input name="title" value={values.title} onChange={change} required /></label>
         <label>Category<select name="category" value={values.category} onChange={change} required><option value="">Select category</option>{activeCategories.map((category) => <option key={category._id} value={category._id}>{category.name}</option>)}</select><small>Create categories from Movie Categories first.</small></label>
-        <label>Language<input name="language" value={values.language} onChange={change} required placeholder="Bangla, English..." /></label>
+        <label>Language<input name="language" value={values.language} onChange={change} placeholder="Enter any language (optional)" /></label>
         <label className="wide">Description<textarea name="description" rows="6" value={values.description} onChange={change} required /></label>
         <label className="wide">YouTube embed URL<input name="youtubeUrl" value={values.youtubeUrl} onChange={change} placeholder="https://www.youtube.com/embed/B9VRvOKKwfs?list=..." required /><small>Paste only the URL from the iframe src attribute, not the full iframe code.</small></label>
         <label>Genres<input name="genres" value={values.genres} onChange={change} placeholder="Action, Drama" /></label>
