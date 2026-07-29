@@ -21,15 +21,18 @@ import {
   UPDATE_BLOG_SUCCESS,
 } from "../constants/blogContants";
 const API_URL = import.meta.env.VITE_API_URL;
-export const getBlog = () => async (dispatch) => {
+export const getBlog = (page = 1, append = false) => async (dispatch) => {
   try {
-    dispatch({ type: ALL_BLOG_REQUEST });
+    dispatch({ type: ALL_BLOG_REQUEST, meta: { append } });
 
-    const { data } = await axios.get(`${API_URL}/api/v1/blogs`);
+    const { data } = await axios.get(`${API_URL}/api/v1/blogs`, {
+      params: { page, limit: 12 },
+    });
 
     dispatch({
       type: ALL_BLOG_SUCCESS,
       payload: data,
+      meta: { append },
     });
   } catch (error) {
     dispatch({

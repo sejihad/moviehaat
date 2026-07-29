@@ -25,6 +25,9 @@ import {
 export const blogsReducer = (state = { blogs: [] }, action) => {
   switch (action.type) {
     case ALL_BLOG_REQUEST:
+      return action.meta?.append
+        ? { ...state, loadingMore: true, error: null }
+        : { ...state, loading: true, blogs: [], error: null };
     case ADMIN_BLOG_REQUEST:
       return {
         loading: true,
@@ -33,7 +36,13 @@ export const blogsReducer = (state = { blogs: [] }, action) => {
     case ALL_BLOG_SUCCESS:
       return {
         loading: false,
-        blogs: action.payload.blogs,
+        loadingMore: false,
+        blogs: action.meta?.append
+          ? [...state.blogs, ...action.payload.blogs]
+          : action.payload.blogs,
+        total: action.payload.total,
+        page: action.payload.page,
+        pages: action.payload.pages,
       };
     case ADMIN_BLOG_SUCCESS:
       return {
@@ -41,6 +50,12 @@ export const blogsReducer = (state = { blogs: [] }, action) => {
         blogs: action.payload,
       };
     case ALL_BLOG_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loadingMore: false,
+        error: action.payload,
+      };
     case ADMIN_BLOG_FAIL:
       return {
         loading: false,
