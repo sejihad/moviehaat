@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Info, Play, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Info, Star } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -38,7 +38,7 @@ const MovieHero = ({ movies }) => {
         <div
           key={item.id}
           className={`movie-hero__backdrop ${index === activeIndex ? "is-active" : ""}`}
-          style={{ backgroundImage: `url(${item.image})` }}
+          style={{ backgroundImage: `url(${item.backdrop || item.image})` }}
           aria-hidden={index !== activeIndex}
         />
       ))}
@@ -61,9 +61,6 @@ const MovieHero = ({ movies }) => {
           </div>
           <p className="movie-hero__description">{movie.description}</p>
           <div className="movie-hero__actions">
-            <Link className="theme-button-primary" to={`/movies/${movie.id}`}>
-              <Play size={18} fill="currentColor" /> Watch now
-            </Link>
             <Link className="movie-hero__secondary" to={`/movies/${movie.id}`}>
               <Info size={18} /> More info
             </Link>

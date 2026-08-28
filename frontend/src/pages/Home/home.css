@@ -2,8 +2,8 @@
 .movie-home__rails { position: relative; z-index: 2; padding: 3.25rem 0 5rem; background: linear-gradient(180deg, #080a0f 0%, #0b0e15 100%); }
 
 .movie-hero { position: relative; min-height: clamp(570px, 74vh, 790px); isolation: isolate; overflow: hidden; }
-.movie-hero__backdrop { position: absolute; inset: 0; z-index: -3; background-position: center 24%; background-size: cover; opacity: 0; transform: scale(1.06); filter: blur(2px); transition: opacity 800ms ease, transform 7s ease; }
-.movie-hero__backdrop.is-active { opacity: .48; transform: scale(1.12); }
+.movie-hero__backdrop { position: absolute; inset: 0; z-index: -3; background-position: center 24%; background-size: cover; background-repeat: no-repeat; opacity: 0; transform: scale(1.01); transition: opacity 800ms ease, transform 7s ease; }
+.movie-hero__backdrop.is-active { opacity: .48; transform: scale(1.04); }
 .movie-hero__shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, #080a0f 4%, rgba(8,10,15,.94) 34%, rgba(8,10,15,.45) 69%, rgba(8,10,15,.9) 100%), linear-gradient(0deg, #080a0f 0%, transparent 48%, rgba(8,10,15,.65) 100%); }
 .movie-hero__content { min-height: inherit; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); align-items: center; gap: clamp(2rem, 7vw, 7rem); padding-block: 4rem 5.5rem; }
 .movie-hero__copy { max-width: 730px; animation: hero-enter 600ms ease both; }

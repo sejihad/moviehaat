@@ -26,6 +26,8 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import Home from "./pages/Home/Home";
 import Blogs from "./pages/Blogs/Blogs";
 import BlogDetails from "./pages/Blogs/BlogDetails";
+import AboutUs from "./pages/About/AboutUs";
+import PrivacyPolicy from "./pages/Privacy/PrivacyPolicy";
 import MovieDetails from "./pages/Movies/MovieDetails";
 import Movies from "./pages/Movies/Movies";
 import WatchMovie from "./pages/Movies/WatchMovie";
@@ -41,6 +43,8 @@ const GlobalMetaData=()=>{const {pathname}=useLocation();const pages={
   "/":{title:"Discover Movies & Cinema Stories",description:"Discover trending movies, latest releases, reviews and stories from the world of cinema on MovieHaat.",keywords:"movies, trending movies, latest releases, movie reviews, cinema, MovieHaat"},
   "/movies":{title:"Explore Movies",description:"Browse MovieHaat's collection of trending movies, latest releases, action, adventure and more.",keywords:"browse movies, trending movies, latest releases, action movies, MovieHaat"},
   "/blogs":{title:"Movie Journal",description:"Read movie reviews, watch guides, industry stories and thoughtful articles from the MovieHaat Journal.",keywords:"movie blog, movie reviews, watch guides, cinema news, MovieHaat Journal",type:"blog"},
+  "/about":{title:"About Us",description:"Learn how MovieHaat publishes movie articles, reviews, recommendations and cinema news."},
+  "/privacy":{title:"Privacy Policy",description:"Learn what personal information MovieHaat collects and how it is used and protected."},
   "/login":{title:"Login or Create an Account",description:"Sign in to MovieHaat or create an account to continue your movie journey.",noIndex:true},
   "/google-success":{title:"Completing Google Sign In",description:"Completing your secure MovieHaat sign in.",noIndex:true},
   "/password/forgot":{title:"Forgot Password",description:"Request a secure password reset link for your MovieHaat account.",noIndex:true},
@@ -68,7 +72,7 @@ const patterns=[
 ];
 const metadata=pages[pathname]||patterns.find(([pattern])=>pattern.test(pathname))?.[1]||{title:"Page Not Found",description:"The requested MovieHaat page could not be found.",noIndex:true};return <MetaData {...metadata}/>;};
 const App=()=>{const dispatch=useDispatch();useEffect(()=>{const token=localStorage.getItem("token");if(!token)return;try{jwtDecode(token).exp*1000>Date.now()?dispatch(loadUser()):dispatch(logout())}catch{dispatch(logout())}},[dispatch]);return <BrowserRouter><ScrollToTop/><GlobalMetaData/><Header/><Routes>
-  <Route path="/" element={<Home/>}/><Route path="/movies" element={<Movies/>}/><Route path="/movies/:slug" element={<MovieDetails/>}/><Route path="/watch/:slug" element={<WatchMovie/>}/><Route path="/blogs" element={<Blogs/>}/><Route path="/blog/:slug" element={<BlogDetails/>}/><Route path="/login" element={<Login/>}/><Route path="/google-success" element={<GoogleSuccess/>}/><Route path="/password/forgot" element={<ForgotPassword/>}/><Route path="/password/reset/:token" element={<ResetPassword/>}/>
+  <Route path="/" element={<Home/>}/><Route path="/movies" element={<Movies/>}/><Route path="/movies/:slug" element={<MovieDetails/>}/><Route path="/watch/:slug" element={<WatchMovie/>}/><Route path="/blogs" element={<Blogs/>}/><Route path="/blog/:slug" element={<BlogDetails/>}/><Route path="/about" element={<AboutUs/>}/><Route path="/privacy" element={<PrivacyPolicy/>}/><Route path="/login" element={<Login/>}/><Route path="/google-success" element={<GoogleSuccess/>}/><Route path="/password/forgot" element={<ForgotPassword/>}/><Route path="/password/reset/:token" element={<ResetPassword/>}/>
   <Route path="/profile" element={<Guard><Profile/></Guard>}/><Route path="/profile/update" element={<Guard><UpdateProfile/></Guard>}/><Route path="/profile/delete" element={<Guard><Delete/></Guard>}/><Route path="/password/update" element={<Guard><UpdatePassword/></Guard>}/><Route path="/profile/setting" element={<Guard><Setting/></Guard>}/>
   <Route path="/admin/dashboard" element={<Guard admin><Dashboard/></Guard>}/><Route path="/admin/movies" element={<Guard admin><AllMovies/></Guard>}/><Route path="/admin/movie-categories" element={<Guard admin><AllCategories/></Guard>}/><Route path="/admin/movie/new" element={<Guard admin><MovieForm/></Guard>}/><Route path="/admin/movie/:id" element={<Guard admin><MovieForm/></Guard>}/><Route path="/admin/blogs" element={<Guard admin><AllBlogs/></Guard>}/><Route path="/admin/blog/new" element={<Guard admin><NewBlog/></Guard>}/><Route path="/admin/blog/:id" element={<Guard admin><UpdateBlog/></Guard>}/><Route path="/admin/users" element={<Guard admin><AllUsers/></Guard>}/><Route path="/admin/user/:id" element={<Guard admin><UserDetails/></Guard>}/><Route path="*" element={<NotFound/>}/>
   </Routes><ToastContainer theme="dark"/><Footer/></BrowserRouter>};

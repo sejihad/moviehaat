@@ -2,9 +2,11 @@ const Footer = () => {
   return (
     <footer className="border-t border-white/10 bg-[#080a0f] pb-20 lg:pb-0">
       <div className="container flex flex-col items-center justify-between gap-2 px-4 py-5 sm:flex-row sm:gap-6 sm:py-6">
-        <p className="text-center text-xs leading-5 text-[#737d91] sm:text-left">
-          © {new Date().getFullYear()} MovieHaat. All rights reserved.
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs leading-5 text-[#737d91] sm:justify-start">
+          <p>© {new Date().getFullYear()} MovieHaat. All rights reserved.</p>
+          <a className="transition-colors hover:text-white" href="/about">About</a>
+          <a className="transition-colors hover:text-white" href="/privacy">Privacy</a>
+        </div>
 
         <p className="text-center text-xs leading-5 text-[#737d91] sm:text-right">
           Developed by{" "}
