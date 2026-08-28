@@ -38,7 +38,7 @@ const MovieHero = ({ movies }) => {
         <div
           key={item.id}
           className={`movie-hero__backdrop ${index === activeIndex ? "is-active" : ""}`}
-          style={{ backgroundImage: `url(${item.backdrop || item.image})` }}
+          style={{ backgroundImage: `url(${item.image})` }}
           aria-hidden={index !== activeIndex}
         />
       ))}
